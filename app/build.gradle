@@ -1,48 +1,109 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlinx-serialization")
+    id("kotlin-kapt")
 }
 
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+
 android {
-    compileSdk 31
+
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.acutisbits.asosspacex"
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        archivesBaseName = "Veritas-$versionName"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+
     buildFeatures {
         viewBinding true
     }
+
+    buildTypes {
+        debug {
+            versionNameSuffix "-debug"
+            buildConfigField "String", "SERVER_URL", '"https://api.veritas.shimunmatic.de/"'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "SERVER_URL", '"https://api.veritas.shimunmatic.de/"'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/gradle/incremental.annotation.processors'
+    }
 }
 
-dependencies {
+def coreKtxVersion = "1.6.0"
+def coroutinesVersion = "1.4.2"
+def serializationVersion = "1.2.1"
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+def koinVersion = "2.2.3"
+
+def retrofitVersion = "2.9.0"
+def interceptorVersion = "4.9.0"
+def serializationConverterVersion = "0.8.0"
+
+def fragmentKtxVersion = "1.3.5"
+def lifecycleVersion = "2.3.1"
+def recyclerViewVersion = "1.2.1"
+def appCompatVersion = "1.3.0"
+def materialVersion = "1.3.0"
+
+def constraint_layout_version = "2.0.4"
+def coordinator_layout_version = "1.1.0"
+
+def timberVersion = "4.7.1"
+
+def roomVersion = "2.3.0"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation("androidx.core:core-ktx:$coreKtxVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-androidx-scope:$koinVersion")
+    implementation("io.insert-koin:koin-core-ext:$koinVersion")
+    implementation("io.insert-koin:koin-androidx-viewmodel:$koinVersion")
+    implementation("io.insert-koin:koin-androidx-fragment:$koinVersion")
+
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$interceptorVersion")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$serializationConverterVersion")
+
+    implementation("androidx.fragment:fragment-ktx:$fragmentKtxVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.recyclerview:recyclerview:$recyclerViewVersion")
+    implementation("androidx.appcompat:appcompat:$appCompatVersion")
+    implementation("com.google.android.material:material:$materialVersion")
+
+    implementation("androidx.constraintlayout:constraintlayout:$constraint_layout_version")
+    implementation("androidx.coordinatorlayout:coordinatorlayout:$coordinator_layout_version")
+
+    implementation("com.jakewharton.timber:timber:$timberVersion")
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
 }
