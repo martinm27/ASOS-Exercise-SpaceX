@@ -9,4 +9,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="main_spaceX_title">SpaceX</string>
+    <string name="main_spaceX_subtitle_company">Company</string>
+    <string name="filter_spacex_launches_contentDescription">Filter SpaceX launches</string>
+    <string name="main_spaceX_subtitle_launches">Launches</string>
+    <string name="launch_mission_image_contentDescription">Launch mission image</string>
+    <string name="launch_success_image_contentDescription">Launch success image</string>
 </resources>

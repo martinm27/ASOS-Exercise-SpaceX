@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/launchMissionImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:contentDescription="@string/launch_mission_image_contentDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/launchSuccessImage"
+        android:layout_width="@dimen/clickable_icon_size"
+        android:layout_height="@dimen/clickable_icon_size"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:contentDescription="@string/launch_success_image_contentDescription"
+        android:src="@drawable/ic_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/launchMissionPropertyKey"
+        style="@style/SpaceXLaunchPropertyKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/launchMissionImage"
+        app:layout_constraintTop_toTopOf="@id/launchMissionImage"
+        tools:text="Mission:"/>
+
+    <TextView
+        android:id="@+id/launchDateTimePropertyKey"
+        style="@style/SpaceXLaunchPropertyKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/clickable_icon_min_margin"
+        app:layout_constraintStart_toEndOf="@id/launchMissionImage"
+        app:layout_constraintTop_toBottomOf="@id/launchMissionPropertyValue"
+        tools:text="Date/time:"/>
+
+    <TextView
+        android:id="@+id/launchRocketPropertyKey"
+        style="@style/SpaceXLaunchPropertyKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/clickable_icon_min_margin"
+        app:layout_constraintStart_toEndOf="@id/launchMissionImage"
+        app:layout_constraintTop_toBottomOf="@id/launchDateTimePropertyValue"
+        tools:text="Rocket:"/>
+
+    <TextView
+        android:id="@+id/launchDaysPropertyKey"
+        style="@style/SpaceXLaunchPropertyKey"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/clickable_icon_min_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        app:layout_constraintEnd_toStartOf="@id/launchDaysPropertyValue"
+        app:layout_constraintStart_toEndOf="@id/launchMissionImage"
+        app:layout_constraintTop_toBottomOf="@id/launchRocketPropertyValue"
+        tools:text="Days from now:"/>
+
+    <TextView
+        android:id="@+id/launchMissionPropertyValue"
+        style="@style/SpaceXLaunchPropertyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/launch_property_value_marginStart"
+        android:layout_marginEnd="@dimen/normal_margin"
+        app:layout_constraintEnd_toStartOf="@+id/launchSuccessImage"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/launchMissionPropertyKey"
+        app:layout_constraintTop_toTopOf="@id/launchMissionImage"
+        tools:text="{mission name}"/>
+
+    <TextView
+        android:id="@+id/launchDateTimePropertyValue"
+        style="@style/SpaceXLaunchPropertyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/launchMissionPropertyValue"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/launchMissionPropertyValue"
+        app:layout_constraintTop_toTopOf="@id/launchDateTimePropertyKey"
+        tools:text="{date} at {time}"/>
+
+    <TextView
+        android:id="@+id/launchRocketPropertyValue"
+        style="@style/SpaceXLaunchPropertyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/launchMissionPropertyValue"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/launchMissionPropertyValue"
+        app:layout_constraintTop_toTopOf="@id/launchRocketPropertyKey"
+        tools:text="{name} / {type}"/>
+
+    <TextView
+        android:id="@+id/launchDaysPropertyValue"
+        style="@style/SpaceXLaunchPropertyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/launchMissionPropertyValue"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/launchMissionPropertyValue"
+        app:layout_constraintTop_toTopOf="@id/launchDaysPropertyKey"
+        tools:text="{today - launch date}"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/launchDaysPropertyKey"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

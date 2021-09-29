@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/spaceXTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:text="@string/main_spaceX_title"
+        android:textSize="@dimen/screen_title_textSize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/spaceXFilterIcon"
+        android:layout_width="@dimen/clickable_icon_size"
+        android:layout_height="@dimen/clickable_icon_size"
+        android:layout_marginTop="@dimen/clickable_icon_min_margin"
+        android:layout_marginEnd="@dimen/clickable_icon_min_margin"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/filter_spacex_launches_contentDescription"
+        android:padding="@dimen/clickable_icon_padding"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/spaceXCompanyTitle"
+        style="@style/SpaceXSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/main_spaceX_subtitle_company"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spaceXTitle"/>
+
+    <TextView
+        android:id="@+id/spaceXCompanyDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/clickable_icon_min_margin"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/screen_description_textSize"
+        app:layout_constraintEnd_toEndOf="@id/spaceXCompanyTitle"
+        app:layout_constraintStart_toStartOf="@id/spaceXCompanyTitle"
+        app:layout_constraintTop_toBottomOf="@id/spaceXCompanyTitle"
+        tools:text="{companyName} was founded by {founderName} in
+{year}. It has now {employees} employees,
+{launch_sites} launch sites, and is valued at USD"/>
+
+    <TextView
+        android:id="@+id/spaceXLaunchesTitle"
+        style="@style/SpaceXSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/main_spaceX_subtitle_launches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spaceXCompanyDescription"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/spaceXLaunchesRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintEnd_toEndOf="@id/spaceXLaunchesTitle"
+        app:layout_constraintStart_toStartOf="@id/spaceXLaunchesTitle"
+        app:layout_constraintTop_toBottomOf="@id/spaceXLaunchesTitle"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
