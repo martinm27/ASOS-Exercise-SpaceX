@@ -7,4 +7,6 @@ interface Router {
     fun clearAll()
 
     fun goBack()
+
+    fun showMain()
 }

@@ -32,9 +32,9 @@
         style="@style/SpaceXLaunchPropertyKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/launch_mission_key"
         app:layout_constraintStart_toEndOf="@id/launchMissionImage"
-        app:layout_constraintTop_toTopOf="@id/launchMissionImage"
-        tools:text="Mission:"/>
+        app:layout_constraintTop_toTopOf="@id/launchMissionImage"/>
 
     <TextView
         android:id="@+id/launchDateTimePropertyKey"
@@ -42,9 +42,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/clickable_icon_min_margin"
+        android:text="@string/launch_date_time_key"
         app:layout_constraintStart_toEndOf="@id/launchMissionImage"
-        app:layout_constraintTop_toBottomOf="@id/launchMissionPropertyValue"
-        tools:text="Date/time:"/>
+        app:layout_constraintTop_toBottomOf="@id/launchMissionPropertyValue"/>
 
     <TextView
         android:id="@+id/launchRocketPropertyKey"
@@ -52,9 +52,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/clickable_icon_min_margin"
+        android:text="@string/launch_rocket_key"
         app:layout_constraintStart_toEndOf="@id/launchMissionImage"
-        app:layout_constraintTop_toBottomOf="@id/launchDateTimePropertyValue"
-        tools:text="Rocket:"/>
+        app:layout_constraintTop_toBottomOf="@id/launchDateTimePropertyValue"/>
 
     <TextView
         android:id="@+id/launchDaysPropertyKey"
@@ -63,10 +63,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/clickable_icon_min_margin"
         android:layout_marginEnd="@dimen/normal_margin"
+        android:text="@string/launch_days_key"
         app:layout_constraintEnd_toStartOf="@id/launchDaysPropertyValue"
         app:layout_constraintStart_toEndOf="@id/launchMissionImage"
-        app:layout_constraintTop_toBottomOf="@id/launchRocketPropertyValue"
-        tools:text="Days from now:"/>
+        app:layout_constraintTop_toBottomOf="@id/launchRocketPropertyValue"/>
 
     <TextView
         android:id="@+id/launchMissionPropertyValue"

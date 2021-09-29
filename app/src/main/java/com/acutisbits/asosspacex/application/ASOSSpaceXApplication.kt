@@ -1,6 +1,8 @@
 package com.acutisbits.asosspacex.application
 
 import android.app.Application
+import com.acutisbits.asosspacex.core.log.LoggerImpl
+import com.acutisbits.asosspacex.core.log.Lumber
 import com.acutisbits.asosspacex.di.appModule
 import com.acutisbits.asosspacex.di.databaseModule
 import com.acutisbits.asosspacex.di.navigationModule
@@ -16,6 +18,7 @@ class ASOSSpaceXApplication : Application() {
         super.onCreate()
 
         initKoin()
+        Lumber.initialise(LoggerImpl())
     }
 
     @ExperimentalSerializationApi

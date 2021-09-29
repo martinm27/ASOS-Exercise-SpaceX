@@ -1,7 +1,9 @@
 package com.acutisbits.asosspacex.coreui.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.recyclerview.widget.DiffUtil
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 
 open class DiffUtilCallback<T : ListItem> : DiffUtil.ItemCallback<T>() {
 
@@ -12,3 +14,16 @@ open class DiffUtilCallback<T : ListItem> : DiffUtil.ItemCallback<T>() {
 }
 
 open class ListItem(open val id: Any? = null)
+
+class CircularProgressDrawableFactory(
+    private val context: Context,
+    private val defaultRadius: Float
+) {
+
+    fun createProgressDrawable(radius: Float = defaultRadius): CircularProgressDrawable =
+        CircularProgressDrawable(context).apply {
+            centerRadius = radius
+            start()
+        }
+}
+

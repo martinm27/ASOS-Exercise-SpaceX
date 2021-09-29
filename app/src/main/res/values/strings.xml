@@ -15,4 +15,8 @@
     <string name="main_spaceX_subtitle_launches">Launches</string>
     <string name="launch_mission_image_contentDescription">Launch mission image</string>
     <string name="launch_success_image_contentDescription">Launch success image</string>
+    <string name="launch_mission_key">Mission:</string>
+    <string name="launch_date_time_key">Date/time:</string>
+    <string name="launch_rocket_key">Rocket:</string>
+    <string name="launch_days_key">Days %s now:</string>
 </resources>

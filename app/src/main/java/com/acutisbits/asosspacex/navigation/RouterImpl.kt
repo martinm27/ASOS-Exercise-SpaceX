@@ -4,6 +4,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.acutisbits.asosspacex.R
+import com.acutisbits.asosspacex.ui.main.ui.MainFragment
 
 private const val LAST_FRAGMENT = 0
 
@@ -15,6 +16,12 @@ class RouterImpl(
     private val activity: AppCompatActivity,
     fragmentManager: FragmentManager
 ) : CloseableRouter(fragmentManager), Router {
+
+    override fun showMain() {
+        fragmentManager.inTransaction {
+            replace(MAIN_FLOW_CONTAINER, MainFragment(), MainFragment.TAG)
+        }
+    }
 
     override fun goBack() = dispatchOnMainThreadWithThrottle(this::goBackInternal)
 

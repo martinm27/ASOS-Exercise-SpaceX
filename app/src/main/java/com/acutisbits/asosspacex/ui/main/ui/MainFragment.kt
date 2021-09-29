@@ -5,7 +5,9 @@ import android.view.View
 import com.acutisbits.asosspacex.coreui.BaseFragment
 import com.acutisbits.asosspacex.databinding.FragmentMainBinding
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMainBinding::inflate) {
 
@@ -15,11 +17,18 @@ class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMa
 
     override val model: MainViewModel by viewModel()
 
-    override fun FragmentMainBinding.initialiseView(view: View, savedInstanceState: Bundle?) {
+    private val adapter: LaunchesAdapter by inject(
+        parameters = { parametersOf(layoutInflater) }
+    )
 
+    override fun FragmentMainBinding.initialiseView(view: View, savedInstanceState: Bundle?) {
+        binding.spaceXLaunchesRecyclerView.adapter = adapter
     }
 
     override fun FragmentMainBinding.render(viewState: MainViewState) {
-
+        with(viewState) {
+            binding.spaceXCompanyDescription.text = companyDescription
+            adapter.submitList(launchesList)
+        }
     }
 }

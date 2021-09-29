@@ -9,4 +9,6 @@
     <dimen name="screen_property_textSize">16sp</dimen>
     <dimen name="screen_description_textSize">14sp</dimen>
     <dimen name="launch_property_value_marginStart">48dp</dimen>
+    <dimen name="circular_drawable_radius">16dp</dimen>
+    <dimen name="default_spinner_radius">16dp</dimen>
 </resources>

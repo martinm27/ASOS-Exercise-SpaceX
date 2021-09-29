@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), RoutingActionCon
         setContentView(view)
 
         if (savedInstanceState == null) {
-            //router.showHome()
+            router.showMain()
         }
     }
 
