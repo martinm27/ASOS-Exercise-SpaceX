@@ -56,7 +56,7 @@ class MainViewModel(
         with(launch) {
             LaunchViewState(
                 id,
-                "",
+                missionImageUrl,
                 missionName,
                 "",
                 "",

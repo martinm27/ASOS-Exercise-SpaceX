@@ -19,6 +19,8 @@ data class APILaunch(
 
     val rocket: APIRocket?,
 
+    val links: APILinks?,
+
     @SerialName("launch_success")
     val isLaunchSuccessful: Boolean?
 )

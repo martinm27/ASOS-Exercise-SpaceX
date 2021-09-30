@@ -41,10 +41,10 @@ class ImageQueryLoaderImpl(
         Glide.with(context)
             .applyDefaultRequestOptions(
                 RequestOptions()
-                    .format(DecodeFormat.PREFER_ARGB_8888)
                     .placeholder(placeholder)
                     .error(errorPlaceholder)
             )
+            .asBitmap()
             .load(image)
             .skipMemoryCache(true)
             .into(target)

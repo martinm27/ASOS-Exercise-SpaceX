@@ -4,6 +4,7 @@
     <dimen name="clickable_icon_size">48dp</dimen>
     <dimen name="clickable_icon_min_margin">4dp</dimen>
     <dimen name="normal_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
     <dimen name="screen_title_textSize">20sp</dimen>
     <dimen name="screen_subtitle_textSize">18sp</dimen>
     <dimen name="screen_property_textSize">16sp</dimen>

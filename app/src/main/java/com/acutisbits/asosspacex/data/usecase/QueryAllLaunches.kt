@@ -1,5 +1,7 @@
 package com.acutisbits.asosspacex.data.usecase
 
+import com.acutisbits.asosspacex.core.EMPTY_STRING
+import com.acutisbits.asosspacex.core.UNKNOWN_STRING
 import com.acutisbits.asosspacex.core.log.Lumber
 import com.acutisbits.asosspacex.core.usecase.QueryUseCase
 import com.acutisbits.asosspacex.data.model.api.APILaunch
@@ -36,8 +38,12 @@ class QueryAllLaunches(private val service: ASOSSpaceXService) : QueryUseCase<Li
         with(apiLaunch) {
             Launch(
                 id ?: 0,
-                missionName ?: "",
-                false,
+                links?.missionImageUrl ?: EMPTY_STRING,
+                missionName ?: UNKNOWN_STRING,
+                links?.articleLink ?: EMPTY_STRING,
+                links?.wikipediaLink ?: EMPTY_STRING,
+                links?.videoLink ?: EMPTY_STRING,
+                isUpcoming ?: false,
                 Date(launchDate ?: 0),
                 mapRocket(rocket),
                 isLaunchSuccessful ?: false

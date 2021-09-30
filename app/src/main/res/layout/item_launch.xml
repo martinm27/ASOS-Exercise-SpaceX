@@ -8,11 +8,12 @@
 
     <ImageView
         android:id="@+id/launchMissionImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/normal_margin"
-        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_width="@dimen/clickable_icon_size"
+        android:layout_height="@dimen/clickable_icon_size"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/small_margin"
         android:contentDescription="@string/launch_mission_image_contentDescription"
+        app:layout_constraintEnd_toStartOf="@id/launchMissionPropertyKey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -32,6 +33,7 @@
         style="@style/SpaceXLaunchPropertyKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
         android:text="@string/launch_mission_key"
         app:layout_constraintStart_toEndOf="@id/launchMissionImage"
         app:layout_constraintTop_toTopOf="@id/launchMissionImage"/>
@@ -43,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/clickable_icon_min_margin"
         android:text="@string/launch_date_time_key"
-        app:layout_constraintStart_toEndOf="@id/launchMissionImage"
+        app:layout_constraintStart_toStartOf="@id/launchMissionPropertyKey"
         app:layout_constraintTop_toBottomOf="@id/launchMissionPropertyValue"/>
 
     <TextView
@@ -53,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/clickable_icon_min_margin"
         android:text="@string/launch_rocket_key"
-        app:layout_constraintStart_toEndOf="@id/launchMissionImage"
+        app:layout_constraintStart_toStartOf="@id/launchMissionPropertyKey"
         app:layout_constraintTop_toBottomOf="@id/launchDateTimePropertyValue"/>
 
     <TextView
@@ -65,7 +67,7 @@
         android:layout_marginEnd="@dimen/normal_margin"
         android:text="@string/launch_days_key"
         app:layout_constraintEnd_toStartOf="@id/launchDaysPropertyValue"
-        app:layout_constraintStart_toEndOf="@id/launchMissionImage"
+        app:layout_constraintStart_toStartOf="@id/launchMissionPropertyKey"
         app:layout_constraintTop_toBottomOf="@id/launchRocketPropertyValue"/>
 
     <TextView
