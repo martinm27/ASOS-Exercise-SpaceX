@@ -28,7 +28,8 @@ fun appModule() = module {
 
     factory {
         val layoutInflater: LayoutInflater = it[0]
-        LaunchesAdapter(layoutInflater, get())
+        val onClickListener: (String, String, String) -> Unit = it[1]
+        LaunchesAdapter(layoutInflater, get(), onClickListener)
     }
 
     viewModel {

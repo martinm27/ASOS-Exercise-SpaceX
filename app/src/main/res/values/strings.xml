@@ -15,4 +15,9 @@
     <string name="company_info_description">%s was founded by %s in %s. It has now %s employees, %s launch sites, and is valued at USD %s</string>
     <string name="from">from</string>
     <string name="since">since</string>
+    <string name="open_link_title">Open link</string>
+    <string name="open_article_title">Launch article</string>
+    <string name="open_wikipedia_title">Wikipedia</string>
+    <string name="open_video_title">Video</string>
+    <string name="cancel_button_text">Cancel</string>
 </resources>

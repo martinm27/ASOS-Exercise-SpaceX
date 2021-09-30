@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/alertDialogTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:text="@string/open_link_title"
+        android:textAlignment="center"
+        android:textSize="@dimen/screen_title_textSize"
+        app:layout_constraintBottom_toTopOf="@id/alertTopDialogSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/alertTopDialogSeparator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/large_margin"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/openArticle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alertDialogTitle"/>
+
+    <TextView
+        android:id="@+id/openArticle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingTop="@dimen/normal_margin"
+        android:paddingBottom="@dimen/normal_margin"
+        android:text="@string/open_article_title"
+        android:textAlignment="center"
+        android:textSize="@dimen/screen_subtitle_textSize"
+        app:layout_constraintBottom_toTopOf="@id/alertDialogFirstSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alertTopDialogSeparator"/>
+
+    <View
+        android:id="@+id/alertDialogFirstSeparator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/openArticle"/>
+
+    <TextView
+        android:id="@+id/openWikipedia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingTop="@dimen/normal_margin"
+        android:paddingBottom="@dimen/normal_margin"
+        android:text="@string/open_wikipedia_title"
+        android:textAlignment="center"
+        android:textSize="@dimen/screen_subtitle_textSize"
+        app:layout_constraintBottom_toTopOf="@id/alertDialogSecondSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alertDialogFirstSeparator"/>
+
+    <View
+        android:id="@+id/alertDialogSecondSeparator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/openVideo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/openWikipedia"/>
+
+    <TextView
+        android:id="@+id/openVideo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingTop="@dimen/normal_margin"
+        android:paddingBottom="@dimen/normal_margin"
+        android:text="@string/open_video_title"
+        android:textAlignment="center"
+        android:textSize="@dimen/screen_subtitle_textSize"
+        app:layout_constraintBottom_toTopOf="@id/alertDialogLastSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alertDialogSecondSeparator"/>
+
+    <View
+        android:id="@+id/alertDialogLastSeparator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/openVideo"/>
+
+    <TextView
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:elevation="4dp"
+        app:layout_constraintVertical_bias="0"
+        android:padding="@dimen/normal_margin"
+        android:text="@string/cancel_button_text"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/screen_title_textSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alertDialogLastSeparator"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

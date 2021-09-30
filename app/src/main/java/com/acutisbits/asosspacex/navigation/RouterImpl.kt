@@ -1,5 +1,10 @@
 package com.acutisbits.asosspacex.navigation
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
+import android.view.View
+import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -20,6 +25,44 @@ class RouterImpl(
     override fun showMain() {
         fragmentManager.inTransaction {
             replace(MAIN_FLOW_CONTAINER, MainFragment(), MainFragment.TAG)
+        }
+    }
+
+    override fun showOpenLinkDialog(articleUrl: String, wikipediaUrl: String, videoUrl: String) {
+        val alertDialog = AlertDialog.Builder(activity)
+        val customLayout: View = activity.layoutInflater.inflate(R.layout.open_link_dialog, null)
+        alertDialog.setView(customLayout)
+
+        val alert = alertDialog.create().apply {
+            show()
+        }
+
+        with(customLayout) {
+            findViewById<TextView>(R.id.cancel_button).setOnClickListener {
+                alert.dismiss()
+            }
+
+            findViewById<TextView>(R.id.openArticle).setOnClickListener {
+                openUrlInDefaultApp(articleUrl)
+            }
+
+            findViewById<TextView>(R.id.openWikipedia).setOnClickListener {
+                openUrlInDefaultApp(wikipediaUrl)
+            }
+
+            findViewById<TextView>(R.id.openVideo).setOnClickListener {
+                openUrlInDefaultApp(videoUrl)
+            }
+        }
+    }
+
+    fun openUrlInDefaultApp(url: String) {
+        val openURL = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url)
+        }
+
+        if (openURL.resolveActivity(activity.packageManager) != null) {
+            activity.startActivity(openURL)
         }
     }
 

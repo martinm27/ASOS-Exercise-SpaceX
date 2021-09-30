@@ -11,18 +11,20 @@ import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 
 class LaunchesAdapter(
     private val layoutInflater: LayoutInflater,
-    private val imageQueryLoader: ImageQueryLoader
+    private val imageQueryLoader: ImageQueryLoader,
+    private val onClickListener: (String, String, String) -> Unit
 ) : BaseListAdapter<LaunchViewState, LaunchesAdapter.LaunchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder =
-        LaunchViewHolder(layoutInflater, parent, imageQueryLoader)
+        LaunchViewHolder(layoutInflater, parent, imageQueryLoader, onClickListener)
 
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) = holder.render(getItem(position))
 
     class LaunchViewHolder(
         layoutInflater: LayoutInflater,
         parent: ViewGroup,
-        private val imageQueryLoader: ImageQueryLoader
+        private val imageQueryLoader: ImageQueryLoader,
+        private val onClickListener: (String, String, String) -> Unit
     ) : BindingViewHolder<LaunchViewState, ItemLaunchBinding>(ItemLaunchBinding.inflate(layoutInflater, parent, false)) {
 
         private var currentImageUrl: String? = null
@@ -36,6 +38,10 @@ class LaunchesAdapter(
                         missionPatchImageUrl,
                         R.drawable.ic_failed
                     )
+                }
+
+                itemView.setOnClickListener {
+                    onClickListener(articleUrl, wikipediaUrl, videoUrl)
                 }
 
                 launchDaysPropertyKey.text = daysKey

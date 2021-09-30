@@ -9,13 +9,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.acutisbits.asosspacex.navigation.BackPropagatingFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment<ViewState : Any, Binding : ViewBinding>(
     private val bindingInflater: (LayoutInflater) -> Binding
-) : Fragment(), BackPropagatingFragment {
+) : Fragment() {
 
     abstract val model: BaseViewModel<ViewState>
 
@@ -53,8 +52,6 @@ abstract class BaseFragment<ViewState : Any, Binding : ViewBinding>(
         super.onViewStateRestored(savedInstanceState)
         model.viewStates().forEach { viewBoundJob { it.collect { binding.render(it) } } }
     }
-
-    override fun back() = false
 
     protected fun viewBoundJob(job: suspend () -> Unit) = viewLifecycleOwner.lifecycleScope.launch { job() }
 

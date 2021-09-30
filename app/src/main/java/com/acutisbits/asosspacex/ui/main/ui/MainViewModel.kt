@@ -13,9 +13,7 @@ import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
 import com.acutisbits.asosspacex.util.DateUtils
 import kotlinx.coroutines.flow.map
-import java.sql.Date
-import java.util.*
-import kotlin.math.abs
+import kotlinx.coroutines.flow.onStart
 
 class MainViewModel(
     private val resources: Resources,
@@ -32,7 +30,9 @@ class MainViewModel(
             )
         })
 
-        query(queryAllLaunches().map {
+        query(queryAllLaunches().onStart {
+            MainViewState.LoadingViewState
+        }.map {
             MainViewState.LaunchesViewState(
                 it.map(::toLaunchViewState)
             )
@@ -63,15 +63,24 @@ class MainViewModel(
                 id,
                 missionImageUrl,
                 missionName,
+                missionArticleUrl,
+                missionWikipediaUrl,
+                missionVideoUrl,
                 String.format(
                     resources.getString(R.string.launch_date_time_value),
                     dateUtils.getFormattedDate(launchDate),
                     dateUtils.getFormattedTime(launchDate)
                 ),
                 "${rocket?.name ?: UNKNOWN_STRING} / ${rocket?.type ?: UNKNOWN_STRING}",
-                String.format(resources.getString(R.string.launch_days_key), resources.getString(if (dateUtils.isDateInFuture(launchDate)) R.string.from else R.string.since)),
+                String.format(
+                    resources.getString(R.string.launch_days_key),
+                    resources.getString(if (dateUtils.isDateInFuture(launchDate)) R.string.from else R.string.since)
+                ),
                 dateUtils.getDateDifferenceFromTodayInDays(launchDate),
                 isLaunchSuccessful
             )
         }
+
+    fun showOpenLinkDialog(articleUrl: String, wikipediaUrl: String, videoUrl: String) =
+        dispatchRoutingAction { it.showOpenLinkDialog(articleUrl, wikipediaUrl, videoUrl) }
 }

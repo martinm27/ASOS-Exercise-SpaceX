@@ -9,4 +9,6 @@ interface Router {
     fun goBack()
 
     fun showMain()
+
+    fun showOpenLinkDialog(articleUrl: String, wikipediaUrl: String, videoUrl: String)
 }

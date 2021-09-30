@@ -18,7 +18,9 @@ class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMa
     override val model: MainViewModel by viewModel()
 
     private val adapter: LaunchesAdapter by inject(
-        parameters = { parametersOf(layoutInflater) }
+        parameters = {
+            parametersOf(layoutInflater, model::showOpenLinkDialog)
+        }
     )
 
     override fun FragmentMainBinding.initialiseView(view: View, savedInstanceState: Bundle?) {
@@ -30,9 +32,11 @@ class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMa
             is MainViewState.CompanyViewState -> {
                 binding.spaceXCompanyDescription.text = viewState.description
             }
-            is MainViewState.ErrorViewState -> { }
+            is MainViewState.ErrorViewState -> {
+            }
             is MainViewState.LaunchesViewState -> adapter.submitList(viewState.launchesList)
-            MainViewState.LoadingViewState -> {}
+            MainViewState.LoadingViewState -> {
+            }
         }
     }
 }
