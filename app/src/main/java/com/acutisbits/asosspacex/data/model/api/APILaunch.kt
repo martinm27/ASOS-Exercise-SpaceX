@@ -14,8 +14,8 @@ data class APILaunch(
     @SerialName("upcoming")
     val isUpcoming: Boolean?,
 
-    @SerialName("launch_date_unix")
-    val launchDate: Long?,
+    @SerialName("launch_date_utc")
+    val launchDate: String?,
 
     val rocket: APIRocket?,
 

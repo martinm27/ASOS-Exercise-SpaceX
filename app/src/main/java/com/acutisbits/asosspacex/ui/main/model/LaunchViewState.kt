@@ -7,7 +7,6 @@ data class LaunchViewState(
     val missionPatchImageUrl: String,
     val missionName: String,
     val missionDate: String,
-    val missionTime: String,
     val rocketData: String,
     val daysKey: String,
     val daysValue: String,

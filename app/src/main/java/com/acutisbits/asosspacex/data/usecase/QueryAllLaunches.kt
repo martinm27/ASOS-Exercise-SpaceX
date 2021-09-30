@@ -44,7 +44,7 @@ class QueryAllLaunches(private val service: ASOSSpaceXService) : QueryUseCase<Li
                 links?.wikipediaLink ?: EMPTY_STRING,
                 links?.videoLink ?: EMPTY_STRING,
                 isUpcoming ?: false,
-                Date(launchDate ?: 0),
+                launchDate ?: UNKNOWN_STRING,
                 mapRocket(rocket),
                 isLaunchSuccessful ?: false
             )

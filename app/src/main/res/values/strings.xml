@@ -13,4 +13,6 @@
     <string name="launch_days_key">Days %s now:</string>
 
     <string name="company_info_description">%s was founded by %s in %s. It has now %s employees, %s launch sites, and is valued at USD %s</string>
+    <string name="from">from</string>
+    <string name="since">since</string>
 </resources>

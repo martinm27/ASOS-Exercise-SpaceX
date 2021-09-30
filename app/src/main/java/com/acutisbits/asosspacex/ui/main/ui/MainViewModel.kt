@@ -11,10 +11,15 @@ import com.acutisbits.asosspacex.data.usecase.QueryCompanyInfo
 import com.acutisbits.asosspacex.navigation.RoutingActionsDispatcher
 import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
+import com.acutisbits.asosspacex.util.DateUtils
 import kotlinx.coroutines.flow.map
+import java.sql.Date
+import java.util.*
+import kotlin.math.abs
 
 class MainViewModel(
     private val resources: Resources,
+    private val dateUtils: DateUtils,
     queryCompanyInfo: QueryCompanyInfo,
     queryAllLaunches: QueryAllLaunches,
     routingActionsDispatcher: RoutingActionsDispatcher
@@ -58,13 +63,15 @@ class MainViewModel(
                 id,
                 missionImageUrl,
                 missionName,
-                "",
-                "",
-                rocket?.name ?: "",
-                "",
-                "",
+                String.format(
+                    resources.getString(R.string.launch_date_time_value),
+                    dateUtils.getFormattedDate(launchDate),
+                    dateUtils.getFormattedTime(launchDate)
+                ),
+                "${rocket?.name ?: UNKNOWN_STRING} / ${rocket?.type ?: UNKNOWN_STRING}",
+                String.format(resources.getString(R.string.launch_days_key), resources.getString(if (dateUtils.isDateInFuture(launchDate)) R.string.from else R.string.since)),
+                dateUtils.getDateDifferenceFromTodayInDays(launchDate),
                 isLaunchSuccessful
             )
         }
-
 }

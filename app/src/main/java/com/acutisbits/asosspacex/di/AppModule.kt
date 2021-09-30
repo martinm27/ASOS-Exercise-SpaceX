@@ -12,6 +12,8 @@ import com.acutisbits.asosspacex.navigation.Router
 import com.acutisbits.asosspacex.navigation.RouterImpl
 import com.acutisbits.asosspacex.ui.main.ui.LaunchesAdapter
 import com.acutisbits.asosspacex.ui.main.ui.MainViewModel
+import com.acutisbits.asosspacex.util.DateUtils
+import com.acutisbits.asosspacex.util.DateUtilsImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -30,10 +32,11 @@ fun appModule() = module {
     }
 
     viewModel {
-        MainViewModel(get(), get(), get(), get())
+        MainViewModel(get(), get(), get(), get(), get())
     }
 
     single<Resources> { androidContext().resources }
+    single<DateUtils> { DateUtilsImpl() }
 
     single {
         CircularProgressDrawableFactory(
