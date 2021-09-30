@@ -11,8 +11,9 @@ import com.acutisbits.asosspacex.data.usecase.QueryCompanyInfo
 import com.acutisbits.asosspacex.navigation.RoutingActionsDispatcher
 import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
+import com.acutisbits.asosspacex.ui.main.model.MainViewState.*
 import com.acutisbits.asosspacex.util.DateUtils
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 
 class MainViewModel(
@@ -24,36 +25,30 @@ class MainViewModel(
 ) : BaseViewModel<MainViewState>(routingActionsDispatcher) {
 
     init {
-        query(queryCompanyInfo().map {
-            MainViewState.CompanyViewState(
-                buildCompanyDescription(it)
-            )
-        })
-
-        query(queryAllLaunches().onStart {
-            MainViewState.LoadingViewState
-        }.map {
-            MainViewState.LaunchesViewState(
-                it.map(::toLaunchViewState)
-            )
-        })
+        query(
+            queryAllLaunches()
+                .combine(queryCompanyInfo()) { launches, companyInfo ->
+                    if (launches.isEmpty() || companyInfo == CompanyInfo.EMPTY) {
+                        ErrorViewState
+                    } else {
+                        ResultViewState(buildCompanyDescription(companyInfo), launches.map(::toLaunchViewState))
+                    }
+                }
+                .onStart { emit(LoadingViewState) }
+        )
     }
 
     private fun buildCompanyDescription(companyInfo: CompanyInfo): String =
-        if (companyInfo == CompanyInfo.EMPTY) {
-            UNKNOWN_STRING
-        } else {
-            with(companyInfo) {
-                String.format(
-                    resources.getString(R.string.company_info_description),
-                    name,
-                    founder,
-                    year,
-                    employeesNumber.toString(),
-                    launchSitesNumber.toString(),
-                    valuation
-                )
-            }
+        with(companyInfo) {
+            String.format(
+                resources.getString(R.string.company_info_description),
+                name,
+                founder,
+                year,
+                employeesNumber.toString(),
+                launchSitesNumber.toString(),
+                valuation
+            )
         }
 
 
@@ -83,4 +78,8 @@ class MainViewModel(
 
     fun showOpenLinkDialog(articleUrl: String, wikipediaUrl: String, videoUrl: String) =
         dispatchRoutingAction { it.showOpenLinkDialog(articleUrl, wikipediaUrl, videoUrl) }
+
+    fun tryAgain() {
+
+    }
 }

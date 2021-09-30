@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="#DF8989"
+    tools:targetApi="lollipop">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners
+                android:bottomLeftRadius="@dimen/rounded_button_corner_radius"
+                android:bottomRightRadius="@dimen/rounded_button_corner_radius"
+                android:topLeftRadius="@dimen/rounded_button_corner_radius"
+                android:topRightRadius="@dimen/rounded_button_corner_radius" />
+
+            <solid android:color="#DF8989" />
+        </shape>
+    </item>
+
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners
+                android:bottomLeftRadius="@dimen/rounded_button_corner_radius"
+                android:bottomRightRadius="@dimen/rounded_button_corner_radius"
+                android:topLeftRadius="@dimen/rounded_button_corner_radius"
+                android:topRightRadius="@dimen/rounded_button_corner_radius" />
+
+            <solid android:color="@android:color/holo_red_dark" />
+        </shape>
+    </item>
+</ripple>
+

@@ -13,7 +13,8 @@ class QueryCompanyInfo(private val service: ASOSSpaceXService) : QueryUseCase<Co
 
     override fun invoke(): Flow<CompanyInfo> =
         flow {
-            emit(mapToReadableData(service.getCompanyInfo()))
+            emit(CompanyInfo.EMPTY)
+            //emit(mapToReadableData(service.getCompanyInfo()))
         }.catch {
             emit(CompanyInfo.EMPTY)
         }

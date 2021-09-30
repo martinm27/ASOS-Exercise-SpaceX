@@ -20,4 +20,5 @@
     <string name="open_wikipedia_title">Wikipedia</string>
     <string name="open_video_title">Video</string>
     <string name="cancel_button_text">Cancel</string>
+    <string name="error_message">Error happened. Try again.</string>
 </resources>

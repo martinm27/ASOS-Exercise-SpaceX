@@ -3,8 +3,11 @@ package com.acutisbits.asosspacex.ui.main.ui
 import android.os.Bundle
 import android.view.View
 import com.acutisbits.asosspacex.coreui.BaseFragment
+import com.acutisbits.asosspacex.coreui.utils.hide
+import com.acutisbits.asosspacex.coreui.utils.show
 import com.acutisbits.asosspacex.databinding.FragmentMainBinding
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
+import com.acutisbits.asosspacex.ui.main.model.MainViewState.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -18,25 +21,35 @@ class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMa
     override val model: MainViewModel by viewModel()
 
     private val adapter: LaunchesAdapter by inject(
-        parameters = {
-            parametersOf(layoutInflater, model::showOpenLinkDialog)
-        }
+        parameters = { parametersOf(layoutInflater, model::showOpenLinkDialog) }
     )
 
     override fun FragmentMainBinding.initialiseView(view: View, savedInstanceState: Bundle?) {
-        binding.spaceXLaunchesRecyclerView.adapter = adapter
+        spaceXLaunchesRecyclerView.adapter = adapter
+        spaceXErrorButton.setOnClickListener {
+            model.tryAgain()
+        }
     }
 
-    override fun FragmentMainBinding.render(viewState: MainViewState) {
-        when (viewState) {
-            is MainViewState.CompanyViewState -> {
-                binding.spaceXCompanyDescription.text = viewState.description
-            }
-            is MainViewState.ErrorViewState -> {
-            }
-            is MainViewState.LaunchesViewState -> adapter.submitList(viewState.launchesList)
-            MainViewState.LoadingViewState -> {
-            }
+    override fun FragmentMainBinding.render(viewState: MainViewState) = when (viewState) {
+        is ResultViewState -> {
+            spaceXCompanyDescription.text = viewState.description
+            adapter.submitList(viewState.launchesList)
+
+            launchesLoadingSpinner.hide()
+            spaceXErrorButton.hide()
+
+            spaceXCompanyDescription.show()
+            spaceXLaunchesRecyclerView.show()
+        }
+        LoadingViewState -> {
+            launchesLoadingSpinner.show()
+        }
+        ErrorViewState -> {
+            launchesLoadingSpinner.hide()
+            spaceXCompanyDescription.hide()
+            spaceXLaunchesRecyclerView.hide()
+            spaceXErrorButton.show()
         }
     }
 }

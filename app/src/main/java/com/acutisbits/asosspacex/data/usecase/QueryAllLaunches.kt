@@ -2,7 +2,6 @@ package com.acutisbits.asosspacex.data.usecase
 
 import com.acutisbits.asosspacex.core.EMPTY_STRING
 import com.acutisbits.asosspacex.core.UNKNOWN_STRING
-import com.acutisbits.asosspacex.core.log.Lumber
 import com.acutisbits.asosspacex.core.usecase.QueryUseCase
 import com.acutisbits.asosspacex.data.model.api.APILaunch
 import com.acutisbits.asosspacex.data.model.api.APIRocket
@@ -13,17 +12,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
-import java.sql.Date
 
 class QueryAllLaunches(private val service: ASOSSpaceXService) : QueryUseCase<List<Launch>> {
 
     override fun invoke(): Flow<List<Launch>> =
         flow {
             val allLaunches = service.getAllLaunches(null)
-
             emit(mapToReadableData(allLaunches))
         }.catch {
-            Lumber.w(it.localizedMessage ?: "")
             emit(emptyList())
         }
 
