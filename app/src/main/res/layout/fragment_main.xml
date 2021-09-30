@@ -72,6 +72,7 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/launches_paddingBottom"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="@id/spaceXLaunchesTitle"
         app:layout_constraintStart_toStartOf="@id/spaceXLaunchesTitle"

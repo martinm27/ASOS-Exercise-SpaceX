@@ -11,4 +11,5 @@
     <dimen name="launch_property_value_marginStart">48dp</dimen>
     <dimen name="circular_drawable_radius">16dp</dimen>
     <dimen name="default_spinner_radius">16dp</dimen>
+    <dimen name="launches_paddingBottom">48dp</dimen>
 </resources>

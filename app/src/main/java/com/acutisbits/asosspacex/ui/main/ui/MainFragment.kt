@@ -26,9 +26,13 @@ class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMa
     }
 
     override fun FragmentMainBinding.render(viewState: MainViewState) {
-        with(viewState) {
-            binding.spaceXCompanyDescription.text = companyDescription
-            adapter.submitList(launchesList)
+        when (viewState) {
+            is MainViewState.CompanyViewState -> {
+                binding.spaceXCompanyDescription.text = viewState.description
+            }
+            is MainViewState.ErrorViewState -> { }
+            is MainViewState.LaunchesViewState -> adapter.submitList(viewState.launchesList)
+            MainViewState.LoadingViewState -> {}
         }
     }
 }

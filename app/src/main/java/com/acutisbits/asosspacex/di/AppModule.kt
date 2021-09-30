@@ -1,5 +1,6 @@
 package com.acutisbits.asosspacex.di
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -29,8 +30,10 @@ fun appModule() = module {
     }
 
     viewModel {
-        MainViewModel(get(), get())
+        MainViewModel(get(), get(), get(), get())
     }
+
+    single<Resources> { androidContext().resources }
 
     single {
         CircularProgressDrawableFactory(
