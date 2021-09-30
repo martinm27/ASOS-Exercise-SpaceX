@@ -3,10 +3,7 @@ package com.acutisbits.asosspacex.application
 import android.app.Application
 import com.acutisbits.asosspacex.core.log.LoggerImpl
 import com.acutisbits.asosspacex.core.log.Lumber
-import com.acutisbits.asosspacex.di.appModule
-import com.acutisbits.asosspacex.di.databaseModule
-import com.acutisbits.asosspacex.di.navigationModule
-import com.acutisbits.asosspacex.di.networkModule
+import com.acutisbits.asosspacex.di.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -31,6 +28,7 @@ class ASOSSpaceXApplication : Application() {
                     networkModule(),
                     databaseModule(),
                     navigationModule(),
+                    dataModule()
                 )
             )
         }
