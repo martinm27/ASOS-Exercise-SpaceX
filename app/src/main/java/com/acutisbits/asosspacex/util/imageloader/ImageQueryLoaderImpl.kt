@@ -1,4 +1,4 @@
-package com.acutisbits.asosspacex.imageloader
+package com.acutisbits.asosspacex.util.imageloader
 
 import android.content.Context
 import android.graphics.drawable.Drawable

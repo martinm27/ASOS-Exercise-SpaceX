@@ -8,8 +8,8 @@ import com.acutisbits.asosspacex.coreui.utils.show
 import com.acutisbits.asosspacex.databinding.FragmentMainBinding
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState.*
-import com.acutisbits.asosspacex.util.SortingOrder
-import com.acutisbits.asosspacex.util.SortingType
+import com.acutisbits.asosspacex.util.sort.SortingOrder
+import com.acutisbits.asosspacex.util.sort.SortingType
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

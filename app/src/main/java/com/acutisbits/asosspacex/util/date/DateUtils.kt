@@ -1,4 +1,4 @@
-package com.acutisbits.asosspacex.util
+package com.acutisbits.asosspacex.util.date
 
 interface DateUtils {
 

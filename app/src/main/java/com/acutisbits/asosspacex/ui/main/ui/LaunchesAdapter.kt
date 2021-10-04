@@ -6,7 +6,7 @@ import com.acutisbits.asosspacex.R
 import com.acutisbits.asosspacex.coreui.BaseListAdapter
 import com.acutisbits.asosspacex.coreui.BindingViewHolder
 import com.acutisbits.asosspacex.databinding.ItemLaunchBinding
-import com.acutisbits.asosspacex.imageloader.ImageQueryLoader
+import com.acutisbits.asosspacex.util.imageloader.ImageQueryLoader
 import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 
 class LaunchesAdapter(

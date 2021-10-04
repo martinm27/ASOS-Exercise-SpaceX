@@ -14,9 +14,9 @@ import com.acutisbits.asosspacex.navigation.RoutingActionsDispatcher
 import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState.*
-import com.acutisbits.asosspacex.util.DateUtils
-import com.acutisbits.asosspacex.util.SortingOrder
-import com.acutisbits.asosspacex.util.SortingType
+import com.acutisbits.asosspacex.util.date.DateUtils
+import com.acutisbits.asosspacex.util.sort.SortingOrder
+import com.acutisbits.asosspacex.util.sort.SortingType
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 

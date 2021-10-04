@@ -8,10 +8,10 @@ import com.acutisbits.asosspacex.data.model.api.APIRocket
 import com.acutisbits.asosspacex.data.model.domain.Launch
 import com.acutisbits.asosspacex.data.model.domain.Rocket
 import com.acutisbits.asosspacex.data.network.ASOSSpaceXService
-import com.acutisbits.asosspacex.util.SortingOrder
-import com.acutisbits.asosspacex.util.SortingType
-import com.acutisbits.asosspacex.util.SuccessionComparator
-import com.acutisbits.asosspacex.util.YearComparator
+import com.acutisbits.asosspacex.util.sort.SortingOrder
+import com.acutisbits.asosspacex.util.sort.SortingType
+import com.acutisbits.asosspacex.util.sort.SuccessionComparator
+import com.acutisbits.asosspacex.util.sort.YearComparator
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onStart
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.acutisbits.asosspacex.util
+package com.acutisbits.asosspacex.util.sort
 
 import com.acutisbits.asosspacex.data.model.domain.Launch
 import com.acutisbits.asosspacex.util.sort.LaunchComparator
