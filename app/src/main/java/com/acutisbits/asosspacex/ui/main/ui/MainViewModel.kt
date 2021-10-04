@@ -84,10 +84,6 @@ class MainViewModel(
     fun showOpenLinkDialog(articleUrl: String, wikipediaUrl: String, videoUrl: String) =
         dispatchRoutingAction { it.showOpenLinkDialog(articleUrl, wikipediaUrl, videoUrl) }
 
-    fun tryAgain() {
-
-    }
-
     fun showFilterDialog() {
         dispatchRoutingAction {
             it.showFilterDialog { year, isSuccessful, sortingOrder ->

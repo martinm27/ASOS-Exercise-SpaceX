@@ -26,7 +26,6 @@ class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMa
 
     override fun FragmentMainBinding.initialiseView(view: View, savedInstanceState: Bundle?) {
         spaceXLaunchesRecyclerView.adapter = adapter
-        spaceXErrorButton.setOnClickListener { model.tryAgain() }
         spaceXFilterIcon.setOnClickListener { model.showFilterDialog() }
     }
 

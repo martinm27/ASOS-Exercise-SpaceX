@@ -64,7 +64,7 @@ class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSourc
         val sortedList = currentList.asSequence()
             .filter { it.launchYear == year.toInt() && it.isLaunchSuccessful == isLaunchSuccessful }
             .toList()
-            .apply { if (sortingOrder == SortingOrder.DESCENDING) this.asReversed() }
+            .let { if (sortingOrder == SortingOrder.DESCENDING) it.reversed() else it}
 
         launchesListPublisher.tryEmit(sortedList)
     }
