@@ -9,19 +9,20 @@ import com.acutisbits.asosspacex.data.model.domain.Launch
 import com.acutisbits.asosspacex.data.model.domain.Rocket
 import com.acutisbits.asosspacex.data.network.ASOSSpaceXService
 import com.acutisbits.asosspacex.util.sort.SortingOrder
-import com.acutisbits.asosspacex.util.sort.SuccessionComparator
-import com.acutisbits.asosspacex.util.sort.YearComparator
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
 import retrofit2.Response
 
 class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSource {
 
-    private val launchesListPublisher = mutableSharedFlowWithLatest<List<Launch>>()
+    private val launchesListPublisher = mutableSharedFlowWithLatest<List<Launch>?>()
 
     private val launchesListFlow = launchesListPublisher
         .onStart { emit(getLaunchesList()) }
         .distinctUntilChanged()
+        .catch { emit(null) }
 
     private suspend fun getLaunchesList(): List<Launch> = mapToReadableData(service.getAllLaunches(null))
 
@@ -54,20 +55,18 @@ class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSourc
     override fun getAllLaunches() = launchesListFlow
 
     override suspend fun sortLaunches(year: String, isLaunchSuccessful: Boolean, sortingOrder: SortingOrder) {
-        var currentList = launchesListPublisher.replayCache.firstOrNull()
+        var currentList = launchesListFlow.firstOrNull()
 
         if (currentList == null) {
             currentList = mapToReadableData(service.getAllLaunches(null))
         }
 
-     /*   val sortedList = currentList.sortedWith(
-            when (sortingType) {
-                SortingType.YEAR -> YearComparator
-                SortingType.SUCCESSION -> SuccessionComparator
-            }
-        ).apply { if (sortingOrder == SortingOrder.DESCENDING) this.asReversed() }
-*/
-        launchesListPublisher.tryEmit(currentList)
+        val sortedList = currentList.asSequence()
+            .filter { it.launchYear == year.toInt() && it.isLaunchSuccessful == isLaunchSuccessful }
+            .toList()
+            .apply { if (sortingOrder == SortingOrder.DESCENDING) this.asReversed() }
+
+        launchesListPublisher.tryEmit(sortedList)
     }
 
 }

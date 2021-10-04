@@ -30,4 +30,5 @@
     <string name="descending">DSC</string>
     <string name="filter_options">Filter options</string>
     <string name="apply_filter">Apply</string>
+    <string name="empty_launches_state">No Launches</string>
 </resources>

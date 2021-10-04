@@ -37,18 +37,25 @@ class MainFragment : BaseFragment<MainViewState, FragmentMainBinding>(FragmentMa
 
             launchesLoadingSpinner.hide()
             spaceXErrorButton.hide()
+            launchesEmptyState.hide()
 
             spaceXCompanyDescription.show()
             spaceXLaunchesRecyclerView.show()
         }
         LoadingViewState -> {
             launchesLoadingSpinner.show()
+            launchesEmptyState.hide()
         }
         ErrorViewState -> {
             launchesLoadingSpinner.hide()
+            launchesEmptyState.hide()
             spaceXCompanyDescription.hide()
             spaceXLaunchesRecyclerView.hide()
             spaceXErrorButton.show()
+        }
+        EmptyViewState -> {
+            spaceXLaunchesRecyclerView.hide()
+            launchesEmptyState.show()
         }
     }
 }

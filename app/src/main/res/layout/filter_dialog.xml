@@ -53,6 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/filterYearValue"/>
 
     <RadioGroup
+        android:id="@+id/isLaunchSuccessfulGroup"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/normal_margin"
@@ -90,6 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/filterSortingBySuccessionTitle"/>
 
     <RadioGroup
+        android:id="@+id/sortingOrderGroup"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/normal_margin"
@@ -116,6 +118,7 @@
     </RadioGroup>
 
     <Button
+        android:id="@+id/applyFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/big_margin"

@@ -31,8 +31,10 @@ class MainViewModel(
         query(
             queryCompanyInfo()
                 .combine(queryAllLaunches()) { companyInfo, launches ->
-                    if (launches.isEmpty() || companyInfo == CompanyInfo.EMPTY) {
+                    if (launches == null || companyInfo == CompanyInfo.EMPTY) {
                         ErrorViewState
+                    } else if (launches.isEmpty()) {
+                        EmptyViewState
                     } else {
                         ResultViewState(buildCompanyDescription(companyInfo), launches.map(::toLaunchViewState))
                     }

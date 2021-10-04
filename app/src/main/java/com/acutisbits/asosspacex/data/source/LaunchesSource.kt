@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface LaunchesSource {
 
-    fun getAllLaunches(): Flow<List<Launch>>
+    fun getAllLaunches(): Flow<List<Launch>?>
 
     suspend fun sortLaunches(year: String, isLaunchSuccessful: Boolean, sortingOrder: SortingOrder)
 }

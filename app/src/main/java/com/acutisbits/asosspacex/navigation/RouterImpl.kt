@@ -4,8 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -60,7 +59,7 @@ class RouterImpl(
         }
     }
 
-    override fun showFilterDialog(filerAction: (year: String, isSuccessful: Boolean, sortingOrder: SortingOrder) -> Unit) {
+    override fun showFilterDialog(filterAction: (year: String, isSuccessful: Boolean, sortingOrder: SortingOrder) -> Unit) {
         val alertDialog = AlertDialog.Builder(activity)
         val customLayout: View = activity.layoutInflater.inflate(R.layout.filter_dialog, null)
         alertDialog.setView(customLayout)
@@ -70,15 +69,26 @@ class RouterImpl(
         }
 
         with(customLayout) {
-            findViewById<NumberPicker>(R.id.filterYearValue).apply {
+            val yearValue = findViewById<NumberPicker>(R.id.filterYearValue).apply {
                 minValue = MIN_YEAR
                 maxValue = MAX_YEAR - 1
                 value = MAX_YEAR - 1
                 val array = intArrayOf(*((MIN_YEAR until MAX_YEAR).toList().toIntArray())).map(Int::toString).toTypedArray()
                 displayedValues = array
             }
-        }
 
+            val isLaunchSuccessful = findViewById<RadioButton>(R.id.isLaunchSuccessfulPositive)
+            val sortingOrder = findViewById<RadioButton>(R.id.sortingOrderAscending)
+
+            findViewById<Button>(R.id.applyFilter).setOnClickListener {
+                filterAction(
+                    yearValue.value.toString(),
+                    isLaunchSuccessful.isChecked,
+                    if (sortingOrder.isChecked) SortingOrder.ASCENDING else SortingOrder.DESCENDING
+                )
+                alert.dismiss()
+            }
+        }
     }
 
     fun openUrlInDefaultApp(url: String) {
