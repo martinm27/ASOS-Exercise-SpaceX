@@ -4,11 +4,14 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.acutisbits.asosspacex.R
+import com.acutisbits.asosspacex.core.MAX_YEAR
+import com.acutisbits.asosspacex.core.MIN_YEAR
 import com.acutisbits.asosspacex.ui.main.ui.MainFragment
 import com.acutisbits.asosspacex.util.sort.SortingOrder
 
@@ -64,6 +67,16 @@ class RouterImpl(
 
         val alert = alertDialog.create().apply {
             show()
+        }
+
+        with(customLayout) {
+            findViewById<NumberPicker>(R.id.filterYearValue).apply {
+                minValue = MIN_YEAR
+                maxValue = MAX_YEAR - 1
+                value = MAX_YEAR - 1
+                val array = intArrayOf(*((MIN_YEAR until MAX_YEAR).toList().toIntArray())).map(Int::toString).toTypedArray()
+                displayedValues = array
+            }
         }
 
     }

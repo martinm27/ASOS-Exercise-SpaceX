@@ -13,8 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_margin"
         android:text="@string/filter_options"
-        android:textSize="18sp"
+        android:textSize="@dimen/screen_subtitle_textSize"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/filterYearValue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -24,22 +25,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_margin"
-        android:layout_marginTop="@dimen/big_margin"
-        android:padding="8dp"
+        android:padding="@dimen/small_margin"
         android:text="@string/filter_by_year"
+        app:layout_constraintBottom_toBottomOf="@id/filterYearValue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filterTitle"/>
+        app:layout_constraintTop_toTopOf="@id/filterYearValue"/>
 
-    <Button
+    <NumberPicker
         android:id="@+id/filterYearValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/large_margin"
-        android:text="2020"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/filterSortingByYearTitle"
+        android:layout_marginTop="@dimen/big_margin"
+        app:layout_constraintBottom_toTopOf="@id/filterSortingBySuccessionTitle"
         app:layout_constraintStart_toEndOf="@id/filterSortingByYearTitle"
-        app:layout_constraintTop_toTopOf="@id/filterSortingByYearTitle"/>
+        app:layout_constraintTop_toBottomOf="@id/filterTitle"/>
 
     <TextView
         android:id="@+id/filterSortingBySuccessionTitle"
@@ -47,10 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginTop="@dimen/normal_margin"
-        android:padding="8dp"
+        android:padding="@dimen/small_margin"
         android:text="@string/is_launch_successful"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filterSortingByYearTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/filterYearValue"/>
 
     <RadioGroup
         android:layout_width="0dp"
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginTop="@dimen/normal_margin"
-        android:padding="8dp"
+        android:padding="@dimen/small_margin"
         android:text="@string/sorting_order"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filterSortingBySuccessionTitle"/>
