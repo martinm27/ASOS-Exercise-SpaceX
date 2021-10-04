@@ -9,6 +9,7 @@ data class Launch(
     val missionVideoUrl: String,
     val isUpcoming: Boolean,
     val launchDate: String,
+    val launchYear: Int,
     val rocket: Rocket?,
     val isLaunchSuccessful: Boolean
 )

@@ -11,6 +11,9 @@ data class APILaunch(
     @SerialName("mission_name")
     val missionName: String?,
 
+    @SerialName("launch_year")
+    val launchYear: String?,
+
     @SerialName("upcoming")
     val isUpcoming: Boolean?,
 

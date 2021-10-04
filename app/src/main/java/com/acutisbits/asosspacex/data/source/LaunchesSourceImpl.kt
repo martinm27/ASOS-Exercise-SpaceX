@@ -9,9 +9,10 @@ import com.acutisbits.asosspacex.data.model.domain.Launch
 import com.acutisbits.asosspacex.data.model.domain.Rocket
 import com.acutisbits.asosspacex.data.network.ASOSSpaceXService
 import com.acutisbits.asosspacex.util.SortingOrder
-import kotlinx.coroutines.flow.Flow
+import com.acutisbits.asosspacex.util.SortingType
+import com.acutisbits.asosspacex.util.SuccessionComparator
+import com.acutisbits.asosspacex.util.YearComparator
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.onStart
 import retrofit2.Response
 
@@ -43,21 +44,31 @@ class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSourc
                 links?.videoLink ?: EMPTY_STRING,
                 isUpcoming ?: false,
                 launchDate ?: UNKNOWN_STRING,
+                launchYear?.toInt() ?: 0,
                 mapRocket(rocket),
                 isLaunchSuccessful ?: false
             )
         }
 
-    private fun mapRocket(apiRocket: APIRocket?): Rocket? =
-        apiRocket?.let {
-            Rocket(it.id, it.name, it.type)
-        }
+    private fun mapRocket(apiRocket: APIRocket?): Rocket? = apiRocket?.let { Rocket(it.id, it.name, it.type) }
 
     override fun getAllLaunches() = launchesListFlow
 
-    override fun getLaunchesSorted(comparator: Comparator<Launch>, sortingOrder: SortingOrder): Flow<List<Launch>> {
-        return emptyFlow()
-        // TODO: Add list of
+    override suspend fun sortLaunches(sortingType: SortingType, sortingOrder: SortingOrder) {
+        var currentList = launchesListPublisher.replayCache.firstOrNull()
+
+        if (currentList == null) {
+            currentList = mapToReadableData(service.getAllLaunches(null))
+        }
+
+        val sortedList = currentList.sortedWith(
+            when (sortingType) {
+                SortingType.YEAR -> YearComparator
+                SortingType.SUCCESSION -> SuccessionComparator
+            }
+        ).apply { if (sortingOrder == SortingOrder.DESCENDING) this.asReversed() }
+
+        launchesListPublisher.tryEmit(sortedList)
     }
 
 }

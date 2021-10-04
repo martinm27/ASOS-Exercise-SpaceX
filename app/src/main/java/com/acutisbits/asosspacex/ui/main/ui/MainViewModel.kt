@@ -8,17 +8,22 @@ import com.acutisbits.asosspacex.data.model.domain.CompanyInfo
 import com.acutisbits.asosspacex.data.model.domain.Launch
 import com.acutisbits.asosspacex.data.usecase.QueryAllLaunches
 import com.acutisbits.asosspacex.data.usecase.QueryCompanyInfo
+import com.acutisbits.asosspacex.data.usecase.SortLaunches
+import com.acutisbits.asosspacex.data.usecase.SortLaunchesParam
 import com.acutisbits.asosspacex.navigation.RoutingActionsDispatcher
 import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState.*
 import com.acutisbits.asosspacex.util.DateUtils
+import com.acutisbits.asosspacex.util.SortingOrder
+import com.acutisbits.asosspacex.util.SortingType
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 
 class MainViewModel(
     private val resources: Resources,
     private val dateUtils: DateUtils,
+    private val sortLaunches: SortLaunches,
     queryCompanyInfo: QueryCompanyInfo,
     queryAllLaunches: QueryAllLaunches,
     routingActionsDispatcher: RoutingActionsDispatcher
@@ -26,8 +31,8 @@ class MainViewModel(
 
     init {
         query(
-            queryAllLaunches()
-                .combine(queryCompanyInfo()) { launches, companyInfo ->
+            queryCompanyInfo()
+                .combine(queryAllLaunches()) { companyInfo, launches ->
                     if (launches.isEmpty() || companyInfo == CompanyInfo.EMPTY) {
                         ErrorViewState
                     } else {
@@ -81,5 +86,11 @@ class MainViewModel(
 
     fun tryAgain() {
 
+    }
+
+    fun sortList(sortingType: SortingType, sortingOrder: SortingOrder) {
+        runCommand {
+            sortLaunches(SortLaunchesParam(sortingType, sortingOrder))
+        }
     }
 }

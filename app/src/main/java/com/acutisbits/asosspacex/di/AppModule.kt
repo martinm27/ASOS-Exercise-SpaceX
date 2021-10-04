@@ -33,7 +33,7 @@ fun appModule() = module {
     }
 
     viewModel {
-        MainViewModel(get(), get(), get(), get(), get())
+        MainViewModel(get(), get(), get(), get(), get(), get())
     }
 
     single<Resources> { androidContext().resources }
