@@ -9,7 +9,6 @@ import com.acutisbits.asosspacex.data.model.domain.Launch
 import com.acutisbits.asosspacex.data.model.domain.Rocket
 import com.acutisbits.asosspacex.data.network.ASOSSpaceXService
 import com.acutisbits.asosspacex.util.sort.SortingOrder
-import com.acutisbits.asosspacex.util.sort.SortingType
 import com.acutisbits.asosspacex.util.sort.SuccessionComparator
 import com.acutisbits.asosspacex.util.sort.YearComparator
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -54,21 +53,21 @@ class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSourc
 
     override fun getAllLaunches() = launchesListFlow
 
-    override suspend fun sortLaunches(sortingType: SortingType, sortingOrder: SortingOrder) {
+    override suspend fun sortLaunches(year: String, isLaunchSuccessful: Boolean, sortingOrder: SortingOrder) {
         var currentList = launchesListPublisher.replayCache.firstOrNull()
 
         if (currentList == null) {
             currentList = mapToReadableData(service.getAllLaunches(null))
         }
 
-        val sortedList = currentList.sortedWith(
+     /*   val sortedList = currentList.sortedWith(
             when (sortingType) {
                 SortingType.YEAR -> YearComparator
                 SortingType.SUCCESSION -> SuccessionComparator
             }
         ).apply { if (sortingOrder == SortingOrder.DESCENDING) this.asReversed() }
-
-        launchesListPublisher.tryEmit(sortedList)
+*/
+        launchesListPublisher.tryEmit(currentList)
     }
 
 }

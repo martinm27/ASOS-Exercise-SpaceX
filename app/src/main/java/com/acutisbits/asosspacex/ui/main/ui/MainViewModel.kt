@@ -15,8 +15,6 @@ import com.acutisbits.asosspacex.ui.main.model.LaunchViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState
 import com.acutisbits.asosspacex.ui.main.model.MainViewState.*
 import com.acutisbits.asosspacex.util.date.DateUtils
-import com.acutisbits.asosspacex.util.sort.SortingOrder
-import com.acutisbits.asosspacex.util.sort.SortingType
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 
@@ -88,9 +86,13 @@ class MainViewModel(
 
     }
 
-    fun sortList(sortingType: SortingType, sortingOrder: SortingOrder) {
-        runCommand {
-            sortLaunches(SortLaunchesParam(sortingType, sortingOrder))
+    fun showFilterDialog() {
+        dispatchRoutingAction {
+            it.showFilterDialog { year, isSuccessful, sortingOrder ->
+                runCommand {
+                    sortLaunches(SortLaunchesParam(year, isSuccessful, sortingOrder))
+                }
+            }
         }
     }
 }

@@ -21,4 +21,13 @@
     <string name="open_video_title">Video</string>
     <string name="cancel_button_text">Cancel</string>
     <string name="error_message">Error happened. Try again.</string>
+    <string name="filter_by_year">Filter by year:</string>
+    <string name="is_launch_successful">Is launch successful:</string>
+    <string name="sorting_order">Sorting order:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ascending">ASC</string>
+    <string name="descending">DSC</string>
+    <string name="filter_options">Filter options</string>
+    <string name="apply_filter">Apply</string>
 </resources>

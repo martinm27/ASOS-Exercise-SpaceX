@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/normal_margin"
+    android:paddingBottom="@dimen/normal_margin">
+
+    <TextView
+        android:id="@+id/filterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:text="@string/filter_options"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/filterSortingByYearTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/big_margin"
+        android:padding="8dp"
+        android:text="@string/filter_by_year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterTitle"/>
+
+    <Button
+        android:id="@+id/filterYearValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:text="2020"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/filterSortingByYearTitle"
+        app:layout_constraintStart_toEndOf="@id/filterSortingByYearTitle"
+        app:layout_constraintTop_toTopOf="@id/filterSortingByYearTitle"/>
+
+    <TextView
+        android:id="@+id/filterSortingBySuccessionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:padding="8dp"
+        android:text="@string/is_launch_successful"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterSortingByYearTitle"/>
+
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/filterSortingBySuccessionTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/filterSortingBySuccessionTitle"
+        app:layout_constraintTop_toTopOf="@id/filterSortingBySuccessionTitle">
+
+        <RadioButton
+            android:id="@+id/isLaunchSuccessfulPositive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:checked="true"
+            android:text="@string/yes"/>
+
+        <RadioButton
+            android:id="@+id/isLaunchSuccessfulNegative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            android:text="@string/no"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/filterSortingTypeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:padding="8dp"
+        android:text="@string/sorting_order"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterSortingBySuccessionTitle"/>
+
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/filterSortingTypeTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/filterSortingTypeTitle"
+        app:layout_constraintTop_toTopOf="@id/filterSortingTypeTitle">
+
+        <RadioButton
+            android:id="@+id/sortingOrderAscending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:checked="true"
+            android:text="@string/ascending"/>
+
+        <RadioButton
+            android:id="@+id/sortingOrderDescending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            android:text="@string/descending"/>
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_margin"
+        android:text="@string/apply_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterSortingTypeTitle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

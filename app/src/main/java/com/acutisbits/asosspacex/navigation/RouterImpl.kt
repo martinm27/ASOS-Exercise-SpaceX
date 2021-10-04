@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.acutisbits.asosspacex.R
 import com.acutisbits.asosspacex.ui.main.ui.MainFragment
+import com.acutisbits.asosspacex.util.sort.SortingOrder
 
 private const val LAST_FRAGMENT = 0
 
@@ -54,6 +55,17 @@ class RouterImpl(
                 openUrlInDefaultApp(videoUrl)
             }
         }
+    }
+
+    override fun showFilterDialog(filerAction: (year: String, isSuccessful: Boolean, sortingOrder: SortingOrder) -> Unit) {
+        val alertDialog = AlertDialog.Builder(activity)
+        val customLayout: View = activity.layoutInflater.inflate(R.layout.filter_dialog, null)
+        alertDialog.setView(customLayout)
+
+        val alert = alertDialog.create().apply {
+            show()
+        }
+
     }
 
     fun openUrlInDefaultApp(url: String) {
