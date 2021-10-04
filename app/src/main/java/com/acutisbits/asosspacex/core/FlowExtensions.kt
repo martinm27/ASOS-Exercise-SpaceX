@@ -9,8 +9,6 @@ import kotlinx.coroutines.isActive
 import kotlin.coroutines.AbstractCoroutineContextElement
 import kotlin.coroutines.CoroutineContext
 
-private const val DEFAULT_THROTTLE = 300L
-
 /** Factory method for MutableSharedFlow with PublishSubject like behaviour */
 fun <T> mutableSharedFlow() = MutableSharedFlow<T>(extraBufferCapacity = 1)
 
@@ -24,17 +22,3 @@ inline fun safeCoroutineExceptionHandler(crossinline handler: (CoroutineContext,
             else Lumber.w("Error occurred but the consumer is no longer active", exception)
         }
     }
-
-/** Throttles emission of items in defined time periods */
-fun <T> Flow<T>.throttleFirst(period: Long = DEFAULT_THROTTLE): Flow<T> {
-    var startTime = 0L
-    return filter {
-        val time = System.currentTimeMillis()
-        if (time - startTime > period) {
-            startTime = time
-            true
-        } else {
-            false
-        }
-    }
-}

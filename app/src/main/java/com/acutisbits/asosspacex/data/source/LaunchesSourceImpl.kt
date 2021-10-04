@@ -50,7 +50,7 @@ class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSourc
             )
         }
 
-    private fun mapRocket(apiRocket: APIRocket?): Rocket? = apiRocket?.let { Rocket(it.id, it.name, it.type) }
+    private fun mapRocket(apiRocket: APIRocket?): Rocket? = apiRocket?.let { Rocket(it.id ?: UNKNOWN_STRING, it.name ?: UNKNOWN_STRING, it.type ?: UNKNOWN_STRING) }
 
     override fun getAllLaunches() = launchesListFlow
 

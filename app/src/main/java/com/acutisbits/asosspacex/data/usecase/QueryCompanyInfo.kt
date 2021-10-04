@@ -1,5 +1,6 @@
 package com.acutisbits.asosspacex.data.usecase
 
+import com.acutisbits.asosspacex.core.UNKNOWN_STRING
 import com.acutisbits.asosspacex.core.usecase.QueryUseCase
 import com.acutisbits.asosspacex.data.model.api.APICompanyInfo
 import com.acutisbits.asosspacex.data.model.domain.CompanyInfo
@@ -28,12 +29,12 @@ class QueryCompanyInfo(private val service: ASOSSpaceXService) : QueryUseCase<Co
     private fun mapToCompanyInfo(apiCompanyInfo: APICompanyInfo): CompanyInfo =
         with(apiCompanyInfo) {
             CompanyInfo(
-                name,
-                founder,
-                foundationYear.toString(),
-                employeesNumber,
-                launchSites,
-                valuation.toString()
+                name ?: UNKNOWN_STRING,
+                founder ?: UNKNOWN_STRING,
+                foundationYear?.toString() ?: UNKNOWN_STRING,
+                employeesNumber ?: -1,
+                launchSites ?: -1,
+                valuation?.toString() ?: UNKNOWN_STRING
             )
         }
 }

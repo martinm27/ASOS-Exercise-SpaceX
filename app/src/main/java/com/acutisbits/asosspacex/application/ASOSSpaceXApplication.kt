@@ -26,7 +26,6 @@ class ASOSSpaceXApplication : Application() {
                 listOf(
                     appModule(),
                     networkModule(),
-                    databaseModule(),
                     navigationModule(),
                     dataModule()
                 )

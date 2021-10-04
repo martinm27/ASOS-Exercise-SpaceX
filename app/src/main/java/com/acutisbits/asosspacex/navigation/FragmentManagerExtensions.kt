@@ -8,33 +8,6 @@ import androidx.fragment.app.FragmentTransaction
 /** Must be called from main thread. */
 fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
     ensureMainThread { beginTransaction().func().commitNow() }
-
-/** Must be called from main thread. */
-fun FragmentManager.inTransactionAndAddToBackStack(name: String? = null, func: FragmentTransaction.() -> FragmentTransaction) =
-    ensureMainThread {
-        beginTransaction().func().addToBackStack(name).commit()
-        executePendingTransactions()
-    }
-
-/** Must be called from main thread. */
-fun FragmentManager.removeFragmentIfItExists(fragmentTag: String) =
-    ensureMainThread {
-        findFragmentByTag(fragmentTag)?.let {
-            beginTransaction()
-                .remove(it)
-                .commitNow()
-        }
-    }
-
-/** Must be called from main thread. */
-fun FragmentManager.clearBackStackAndInTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
-    ensureMainThread {
-        popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        beginTransaction()
-            .func()
-            .commitNow()
-    }
-
 /**
  * Clears fragments added to the back stack.
  * When back stack is cleared while the container screen is not visible and the top screen has exit animation, onDestroy is not called.
@@ -54,8 +27,6 @@ fun FragmentManager.safeClearBackStack(bottomFragmentTag: String? = null) =
     }
 
 fun FragmentManager.peekBackStack() = if (backStackEntryCount > 0) getBackStackEntryAt(backStackEntryCount - 1) else null
-
-fun FragmentManager.isOnBackStack(backStackTag: String) = (0 until backStackEntryCount).any { getBackStackEntryAt(it).name == backStackTag }
 
 private fun ensureMainThread(block: () -> Unit) {
     val mainLooper = Looper.getMainLooper()

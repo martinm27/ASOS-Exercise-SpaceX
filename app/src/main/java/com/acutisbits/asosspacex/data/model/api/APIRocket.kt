@@ -7,11 +7,11 @@ import kotlinx.serialization.Serializable
 data class APIRocket(
 
     @SerialName("rocket_id")
-    val id: String,
+    val id: String?,
 
     @SerialName("rocket_name")
-    val name: String,
+    val name: String?,
 
     @SerialName("rocket_type")
-    val type: String
+    val type: String?
 )

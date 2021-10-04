@@ -3,8 +3,13 @@ package com.acutisbits.asosspacex.navigation
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.NumberPicker
+import android.widget.RadioButton
+import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -16,14 +21,52 @@ import com.acutisbits.asosspacex.util.sort.SortingOrder
 
 private const val LAST_FRAGMENT = 0
 
+private const val ROUTING_ACTION_THROTTLE_WINDOW = 300
+
 @IdRes
 private const val MAIN_FLOW_CONTAINER = R.id.activity_main_container
 
 @Suppress("TooManyFunctions")
 class RouterImpl(
     private val activity: AppCompatActivity,
-    fragmentManager: FragmentManager
-) : CloseableRouter(fragmentManager), Router {
+    private val fragmentManager: FragmentManager
+) : Router {
+
+    private val mainHandler = Handler(Looper.getMainLooper())
+
+    private var lastActionStamp = 0L
+
+    init {
+        fragmentManager.addOnBackStackChangedListener {
+            mainHandler.post {
+                fragmentManager.peekBackStack()?.let {
+                    if (!it.name.isNullOrBlank()) {
+                        fragmentManager.popBackStackImmediate()
+                    }
+                }
+            }
+        }
+    }
+
+    /** Dispatches action on main thread by posting the action. If the current thread is main thread, action is executed immediately. */
+    private fun dispatchOnMainThread(action: () -> Unit) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            action()
+        } else {
+            mainHandler.post(action::invoke)
+        }
+    }
+
+    private fun dispatchOnMainThreadWithThrottle(action: () -> Unit) {
+        dispatchOnMainThread {
+            System.currentTimeMillis().let {
+                if (lastActionStamp < it - ROUTING_ACTION_THROTTLE_WINDOW) {
+                    lastActionStamp = it
+                    action()
+                }
+            }
+        }
+    }
 
     override fun showMain() {
         fragmentManager.inTransaction {
@@ -91,7 +134,7 @@ class RouterImpl(
         }
     }
 
-    fun openUrlInDefaultApp(url: String) {
+    private fun openUrlInDefaultApp(url: String) {
         val openURL = Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse(url)
         }
@@ -112,6 +155,4 @@ class RouterImpl(
     }
 
     override fun finishHostActivity() = activity.finish()
-
-    override fun clearAll() = fragmentManager.safeClearBackStack()
 }
