@@ -11,16 +11,21 @@ import com.acutisbits.asosspacex.data.network.ASOSSpaceXService
 import com.acutisbits.asosspacex.util.sort.SortingOrder
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
 import retrofit2.Response
 
 class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSource {
 
     private val launchesListPublisher = mutableSharedFlowWithLatest<List<Launch>?>()
+    private val currentList: MutableList<Launch> = mutableListOf()
 
     private val launchesListFlow = launchesListPublisher
-        .onStart { emit(getLaunchesList()) }
+        .onStart {
+            val currentLaunchesList = getLaunchesList()
+            emit(currentLaunchesList)
+            currentList.clear()
+            currentList.addAll(currentLaunchesList)
+        }
         .distinctUntilChanged()
         .catch { emit(null) }
 
@@ -50,21 +55,16 @@ class LaunchesSourceImpl(private val service: ASOSSpaceXService) : LaunchesSourc
             )
         }
 
-    private fun mapRocket(apiRocket: APIRocket?): Rocket? = apiRocket?.let { Rocket(it.id ?: UNKNOWN_STRING, it.name ?: UNKNOWN_STRING, it.type ?: UNKNOWN_STRING) }
+    private fun mapRocket(apiRocket: APIRocket?): Rocket? =
+        apiRocket?.let { Rocket(it.id ?: UNKNOWN_STRING, it.name ?: UNKNOWN_STRING, it.type ?: UNKNOWN_STRING) }
 
     override fun getAllLaunches() = launchesListFlow
 
     override suspend fun sortLaunches(year: String, isLaunchSuccessful: Boolean, sortingOrder: SortingOrder) {
-        var currentList = launchesListFlow.firstOrNull()
-
-        if (currentList == null) {
-            currentList = mapToReadableData(service.getAllLaunches(null))
-        }
-
         val sortedList = currentList.asSequence()
             .filter { it.launchYear == year.toInt() && it.isLaunchSuccessful == isLaunchSuccessful }
             .toList()
-            .let { if (sortingOrder == SortingOrder.DESCENDING) it.reversed() else it}
+            .let { if (sortingOrder == SortingOrder.DESCENDING) it.reversed() else it }
 
         launchesListPublisher.tryEmit(sortedList)
     }
