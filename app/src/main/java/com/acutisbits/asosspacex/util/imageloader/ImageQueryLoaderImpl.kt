@@ -38,7 +38,7 @@ class ImageQueryLoaderImpl(
         placeholder: Drawable,
         errorPlaceholder: Drawable?
     ) {
-        Glide   .with(context)
+        Glide.with(context)
             .applyDefaultRequestOptions(
                 RequestOptions()
                     .placeholder(placeholder)
